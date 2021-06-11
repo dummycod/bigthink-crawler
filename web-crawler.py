@@ -14,7 +14,7 @@ class WebCrawler:
 		self.closingTime = closingTime #after how much seconds site must be closed
 		self.trie = Trie()  #trie to store the links
 		self.options = Options() 
-		self.options.add_extension('uBlock Origin 1.35.2.0.crx') #extention
+		self.options.add_extension('uBlock Origin 1.35.2.0.crx') #extension
 		self.level = level	 #how deep website has to be crawled (may increase time upto 1 hour if set high)
 		self.audio= audio #bool to set if the audio must be played or not
 
@@ -83,14 +83,12 @@ class WebCrawler:
 
 	def postmortem(self,url):
 		sectionsList = self.getSections(url)
-		
 		self.driver = webdriver.Chrome(options= self.options)
 
 		for section in sectionsList:
 			self.getSectionArticles(section)
 
 		self.trie.traverse(self.openAndClose)
-
 		self.driver.close()
 
 
